@@ -98,6 +98,7 @@ class Table {
     this.updateTableContent(store.getOriginalSortedData(this.currentPage));
     let header = document.getElementById(this.currentSortedColumn);
     header.childNodes[1].childNodes[3].innerHTML = '▶';
+    this.isTableSorted = false;
   };
 
   #deleteTableRows = () => {
