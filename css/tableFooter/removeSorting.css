@@ -1,0 +1,15 @@
+.remove-sorting-button {
+  height: 30px;
+  border: 2px solid #26303f;
+  background-color: #202938;
+  border-radius: 5px;
+  margin-top: 2px;
+}
+
+.remove-sorting-button:hover {
+  height: 30px;
+  border: 2px solid #26303f;
+  background-color: #111828;
+  border-radius: 5px;
+  margin-top: 2px;
+}

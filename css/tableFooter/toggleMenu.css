@@ -1,6 +1,5 @@
 .toggle-menu {
   display: inline-block;
-  margin-top: 5px;
 }
 
 .toggle-menu .columns-hide-list {
@@ -19,5 +18,5 @@
   border: 2px solid #26303f;
   background-color: #202938;
   border-radius: 5px;
-  padding: 5px;
+  margin-top: 2px;
 }

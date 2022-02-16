@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
 
     <link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/app.css" />
@@ -14,6 +17,7 @@
 
     <link rel="stylesheet" href="css/tableFooter/tableFooter.css" />
     <link rel="stylesheet" href="css/tableFooter/pagination.css" />
+    <link rel="stylesheet" href="css/tableFooter/removeSorting.css" />
     <link rel="stylesheet" href="css/tableFooter/toggleMenu.css" />
   </head>
 
@@ -22,28 +26,28 @@
       <div class="custom-table" id="customTable">
         <table id="persons">
           <tr>
-            <th>
+            <th id="firstName">
               <div class="sorting">
                 <text>Имя</text>
-                <button class="switcher" id="firstName">▶</button>
+                <button class="switcher">▶</button>
               </div>
             </th>
-            <th>
+            <th id="lastName">
               <div class="sorting">
                 <text>Фамилия</text>
-                <button class="switcher" id="lastName">▶</button>
+                <button class="switcher">▶</button>
               </div>
             </th>
-            <th>
+            <th id="about">
               <div class="sorting">
                 <text>Описание</text>
-                <button class="switcher" id="about">▶</button>
+                <button class="switcher">▶</button>
               </div>
             </th>
-            <th>
+            <th id="eyeColor">
               <div class="sorting">
                 <text>Цвет глаз</text>
-                <button class="switcher" id="eyeColor">▶</button>
+                <button class="switcher">▶</button>
               </div>
             </th>
           </tr>
@@ -51,23 +55,32 @@
 
         <div class="table-footer" id="tableFooter">
           <div class="pagination" id="pagination"></div>
+          <div class="remove-sorting" id="removeSorting">
+            <button class="remove-sorting-button" id="removeSortingButton">
+              Remove Sorting
+            </button>
+          </div>
           <div class="toggle-menu">
-            <span class="show-columns-trigger">Show Columns</span>
+            <button class="show-columns-trigger">Show Columns</button>
             <ul class="columns-hide-list" id="columns-hide-list"></ul>
           </div>
         </div>
       </div>
     </div>
 
-    <script type="text/javascript" src="js/data.js"></script>
-    <script type="text/javascript" src="js/helper.js"></script>
+    <script type="text/javascript" src="src/store/data.js"></script>
+    <script type="text/javascript" src="src/store/store.js"></script>
 
-    <script type="text/javascript" src="js/ProcessedData.js"></script>
-    <script type="text/javascript" src="js/Pagination.js"></script>
-    <script type="text/javascript" src="js/Table.js"></script>
-    <script type="text/javascript" src="js/ToggleMenu.js"></script>
-    <script type="text/javascript" src="js/Form.js"></script>
+    <script type="text/javascript" src="src/components/helper.js"></script>
+    <script type="text/javascript" src="src/components/Pagination.js"></script>
+    <script type="text/javascript" src="src/components/Table.js"></script>
+    <script
+      type="text/javascript"
+      src="src/components/RemoveSorting.js"
+    ></script>
+    <script type="text/javascript" src="src/components/ToggleMenu.js"></script>
+    <script type="text/javascript" src="src/components/Form.js"></script>
 
-    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="src/components/app.js"></script>
   </body>
 </html>

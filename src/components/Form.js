@@ -1,7 +1,6 @@
 class Form {
   constructor(rowId, firstName, lastName, about, eyeColor) {
     this.app = document.getElementById('app');
-    this.formId = Math.random();
     this.currentRowId = rowId;
 
     this.app.appendChild(
@@ -20,7 +19,6 @@ class Form {
 
   #createForm = (firstName, lastName, about, eyeColor) => {
     let form = document.createElement('form');
-    form.id = this.formId;
 
     let firstNameForm = helper.wrapWithDiv(
       helper.wrapWithBold(document.createTextNode('Имя'))
@@ -88,46 +86,32 @@ class Form {
 
   onFormSubmit = e => {
     e.preventDefault();
-    let currentRow = document.getElementById(this.#getCurrentRowId());
     let newRowData = [
       ...e.currentTarget.parentNode.parentNode.parentNode.elements,
     ]
       .slice(0, 4)
       .map(e => e.value);
 
-    [...currentRow.cells].map((c, i) => {
-      if (i === 2) {
-        c.childNodes[0].innerText = newRowData[i];
-        return;
-      }
-      if (i === 3) {
-        c.childNodes[0].childNodes[0].style.backgroundColor = newRowData[i];
-        return;
-      }
-      c.innerText = newRowData[i];
-    });
-
-    processedData.updateDataCopy(
-      newRowData,
-      table.currentPage,
-      currentRow.rowIndex
-    );
+    store.updateDataCopy(newRowData, this.#getCurrentRowId());
 
     if (table.isTableSorted)
-      processedData.updateSplittedData(
-        table.currentSortedColumn,
-        table.isAscending
-      );
+      store.updateSplittedData(table.currentSortedColumn, table.isDescending);
 
-    table.updateTableContent(processedData.splittedData[table.currentPage - 1]);
+    table.editingRowId = null;
+
+    table.updateTableContent(
+      store.getSplittedDataForCurrentPage(table.currentPage)
+    );
 
     this.removeFormFromScreen();
   };
 
   onFormCansel = e => {
     e.preventDefault();
-    let currentRow = document.getElementById(this.currentRowId);
-    currentRow.className = '';
+    table.editingRowId = null;
+    table.updateTableContent(
+      store.getSplittedDataForCurrentPage(table.currentPage)
+    );
     this.removeFormFromScreen();
   };
 

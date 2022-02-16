@@ -1,21 +1,21 @@
 class Table {
   isTableSorted = false;
   currentSortedColumn = null;
-  isAscending = null;
+  isDescending = null;
+  editingRowId = null;
   currentPage = 1;
 
   constructor(personsTable) {
     this.table = personsTable;
-    this.switchers = document.getElementsByClassName('switcher');
-    this.sortTableByColumn.bind(this);
-
-    [...this.switchers].map(s =>
+    this.headers = document.querySelectorAll('th');
+    [...this.headers].map(s =>
       s.addEventListener('click', this.sortTableByColumn)
     );
   }
 
   handleRowClick = e => {
     let rowId = e.currentTarget.id;
+    this.editingRowId = rowId;
     e.currentTarget.className = 'editing-row';
     let [firstName, lastName, about, eyeColor] = [...e.currentTarget.cells].map(
       cell => {
@@ -24,17 +24,20 @@ class Table {
         return cell.innerText;
       }
     );
-    let form = new Form(rowId, firstName, lastName, about, eyeColor);
+    new Form(rowId, firstName, lastName, about, eyeColor);
 
     [...personsTable.rows]
       .slice(1)
       .map(r => r.removeEventListener('click', this.handleRowClick));
   };
 
-  appendRow = ({ name: { firstName, lastName }, about, eyeColor }) => {
+  appendRow = ({ name: { firstName, lastName }, about, eyeColor, id }) => {
     let newRow = this.table.insertRow(-1);
-    newRow.id = Math.random();
-    newRow.addEventListener('click', this.handleRowClick);
+    newRow.id = id;
+    if (newRow.id === this.editingRowId) newRow.className = 'editing-row';
+
+    if (this.editingRowId === null)
+      newRow.addEventListener('click', this.handleRowClick);
 
     let values = [firstName, lastName, about, eyeColor].map((v, i) => {
       if (i === 3) {
@@ -73,34 +76,42 @@ class Table {
     this.isTableSorted = true;
 
     if (this.currentSortedColumn === columnId) {
-      this.isAscending = !this.isAscending;
+      this.isDescending = !this.isDescending;
       this.#setSwitcherIcon(columnId);
     } else {
       this.#setSwitcherIcon(columnId);
       this.currentSortedColumn = columnId;
-      this.isAscending = true;
+      this.isDescending = true;
       this.#setSwitcherIcon(columnId);
     }
 
     this.#deleteTableRows();
 
-    processedData.updateSplittedData(columnId, this.isAscending);
+    store.updateSplittedData(columnId, this.isDescending);
 
-    this.updateTableContent(processedData.splittedData[this.currentPage - 1]);
+    this.updateTableContent(
+      store.getSplittedDataForCurrentPage(this.currentPage)
+    );
+  };
+
+  removeSorting = () => {
+    this.updateTableContent(store.getOriginalSortedData(this.currentPage));
+    let header = document.getElementById(this.currentSortedColumn);
+    header.childNodes[1].childNodes[3].innerHTML = '▶';
   };
 
   #deleteTableRows = () => {
     [...this.table.rows].slice(1).map(r => r.remove());
   };
 
-  #setSwitcherIcon = switcherId => {
-    if (switcherId === this.currentSortedColumn) {
-      let switcher = document.getElementById(switcherId);
-      if (this.isAscending) switcher.innerHTML = '▼';
-      else switcher.innerHTML = '▲';
+  #setSwitcherIcon = columnId => {
+    if (columnId === this.currentSortedColumn) {
+      let header = document.getElementById(columnId);
+      if (this.isDescending) header.childNodes[1].childNodes[3].innerHTML = '▼';
+      else header.childNodes[1].childNodes[3].innerHTML = '▲';
     } else if (this.currentSortedColumn != null) {
-      let switcher = document.getElementById(this.currentSortedColumn);
-      switcher.innerHTML = '▶';
+      let header = document.getElementById(this.currentSortedColumn);
+      header.childNodes[1].childNodes[3].innerHTML = '▶';
     }
   };
 }

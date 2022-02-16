@@ -1,10 +1,10 @@
 class Pagination {
   constructor(pagination) {
     this.pagination = pagination;
-    this.createButtonsArray();
+    this.#createButtonsArray();
   }
 
-  createButtonsArray = () => {
+  #createButtonsArray = () => {
     let pagesCount = Math.ceil(data.length / 10);
     [...Array(pagesCount).keys()].map(i => this.#addButton(i + 1));
   };
@@ -13,7 +13,7 @@ class Pagination {
     let button = document.createElement('button');
     button.addEventListener('click', this.onPageButtonClick);
     button.appendChild(document.createTextNode(buttonNumber));
-    button.className = buttonNumber === 1 ? 'current-button' : 'button'
+    button.className = buttonNumber === 1 ? 'current-button' : 'button';
     this.pagination.appendChild(button);
   };
 
@@ -23,7 +23,7 @@ class Pagination {
     );
     e.currentTarget.className = 'current-button';
     let currentPage = parseInt(e.currentTarget.innerText);
-    table.updateTableContent(processedData.splittedData[currentPage - 1]);
+    table.updateTableContent(store.getSplittedDataForCurrentPage(currentPage));
     table.currentPage = currentPage;
   };
 }

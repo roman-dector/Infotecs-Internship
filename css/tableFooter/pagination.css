@@ -12,6 +12,10 @@
   margin: 2px;
 }
 
+.button:hover {
+background-color: #111828
+}
+
 .pagination .current-button {
   background-color: #111828;
 }

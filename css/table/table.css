@@ -32,6 +32,11 @@ th {
   background-color: #202938;
   border-right: 2px solid #26303f;
 }
+
+th:hover {
+background-color: #111828
+}
+
 td {
   height: 40px;
   color: #d3d3d3;
