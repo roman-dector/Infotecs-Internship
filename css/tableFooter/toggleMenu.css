@@ -1,0 +1,23 @@
+.toggle-menu {
+  display: inline-block;
+  margin-top: 5px;
+}
+
+.toggle-menu .columns-hide-list {
+  display: none;
+}
+
+.toggle-menu:hover .columns-hide-list {
+  display: block;
+  list-style: none;
+  margin-top: 8px;
+  padding: 0;
+}
+
+.toggle-menu .show-columns-trigger {
+  height: 30px;
+  border: 2px solid #26303f;
+  background-color: #202938;
+  border-radius: 5px;
+  padding: 5px;
+}
