@@ -27,12 +27,9 @@
   width: 400px;
   height: 200px;
   color: #d3d3d3;
-  /* border: none; */
   border: 2px solid #26303f;
   resize: none;
   border-radius: 8px;
-  /* background-color: #202938; */
-  /* background-color: #111828; */
   background-color: #323949;
   padding: 4px;
 }

@@ -126,6 +126,8 @@ class Form {
 
   onFormCansel = e => {
     e.preventDefault();
+    let currentRow = document.getElementById(this.currentRowId);
+    currentRow.className = '';
     this.removeFormFromScreen();
   };
 

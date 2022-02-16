@@ -18,7 +18,6 @@ class Pagination {
   };
 
   onPageButtonClick = e => {
-    debugger;
     [...e.currentTarget.parentNode.childNodes].map(
       node => (node.className = 'button')
     );
@@ -26,6 +25,5 @@ class Pagination {
     let currentPage = parseInt(e.currentTarget.innerText);
     table.updateTableContent(processedData.splittedData[currentPage - 1]);
     table.currentPage = currentPage;
-    debugger;
   };
 }

@@ -16,6 +16,7 @@ class Table {
 
   handleRowClick = e => {
     let rowId = e.currentTarget.id;
+    e.currentTarget.className = 'editing-row';
     let [firstName, lastName, about, eyeColor] = [...e.currentTarget.cells].map(
       cell => {
         if (cell.cellIndex === 3)
@@ -23,7 +24,7 @@ class Table {
         return cell.innerText;
       }
     );
-    new Form(rowId, firstName, lastName, about, eyeColor);
+    let form = new Form(rowId, firstName, lastName, about, eyeColor);
 
     [...personsTable.rows]
       .slice(1)
@@ -62,7 +63,6 @@ class Table {
   };
 
   updateTableContent = newPersonsData => {
-    debugger;
     if (this.table.rows.length > 1) this.#deleteTableRows();
     newPersonsData.map(p => this.appendRow(p));
   };

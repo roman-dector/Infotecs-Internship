@@ -2,6 +2,10 @@
   width: 50%;
 }
 
+.custom-table .editing-row {
+  background-color: #323949;
+}
+
 table {
   width: 100%;
   table-layout: fixed;
