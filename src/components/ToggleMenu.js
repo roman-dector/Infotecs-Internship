@@ -1,3 +1,4 @@
+// manage columns visibility
 class ToggleMenu {
   isColumnHide = [false, false, false, false];
   constructor() {
@@ -33,6 +34,7 @@ class ToggleMenu {
     return columnItems;
   };
 
+  // make column visible
   showColumn = index => {
     this.cells = [...document.querySelectorAll('td, th')];
     this.cells
@@ -46,6 +48,7 @@ class ToggleMenu {
     this.isColumnHide[index] = false;
   };
 
+  // make column hidden
   hideColumn = index => {
     this.cells = [...document.querySelectorAll('td, th')];
     this.cells

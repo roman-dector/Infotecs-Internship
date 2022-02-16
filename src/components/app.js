@@ -1,3 +1,5 @@
+// main file that initiate our application
+
 const personsTable = document.getElementById('persons');
 const paginationArea = document.getElementById('pagination');
 

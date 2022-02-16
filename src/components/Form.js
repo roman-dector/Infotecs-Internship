@@ -1,3 +1,4 @@
+// form for getting new value for row
 class Form {
   constructor(rowId, firstName, lastName, about, eyeColor) {
     this.app = document.getElementById('app');
@@ -84,6 +85,7 @@ class Form {
     return form;
   };
 
+  // on submit get new data, update store and rerender table
   onFormSubmit = e => {
     e.preventDefault();
     let newRowData = [

@@ -1,3 +1,4 @@
+// create and update table content
 class Table {
   isTableSorted = false;
   currentSortedColumn = null;
@@ -13,6 +14,7 @@ class Table {
     );
   }
 
+  // calling form for editing row data
   handleRowClick = e => {
     let rowId = e.currentTarget.id;
     this.editingRowId = rowId;
@@ -31,6 +33,7 @@ class Table {
       .map(r => r.removeEventListener('click', this.handleRowClick));
   };
 
+  // add row to end of table
   appendRow = ({ name: { firstName, lastName }, about, eyeColor, id }) => {
     let newRow = this.table.insertRow(-1);
     newRow.id = id;
@@ -65,6 +68,7 @@ class Table {
     });
   };
 
+  // render table with given data
   updateTableContent = newPersonsData => {
     if (this.table.rows.length > 1) this.#deleteTableRows();
     newPersonsData.map(p => this.appendRow(p));
@@ -94,6 +98,7 @@ class Table {
     );
   };
 
+  // return table to original state
   removeSorting = () => {
     this.updateTableContent(store.getOriginalSortedData(this.currentPage));
     let header = document.getElementById(this.currentSortedColumn);

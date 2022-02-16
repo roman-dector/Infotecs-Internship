@@ -1,3 +1,4 @@
+// buttons array for changing table pages
 class Pagination {
   constructor(pagination) {
     this.pagination = pagination;

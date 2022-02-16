@@ -1,10 +1,13 @@
 class Store {
+  // class that handle and manipulate with data
+
   constructor(data) {
     this.dataPartsCount = Math.ceil(data.length / 10);
     this.dataCopy = [...data];
     this.splittedData = this.splitDataToPages([...this.dataCopy]);
   }
 
+  // sort data before splitting
   sortDataByValue = (value, isDescending) =>
     [...this.dataCopy].sort((s, f) => {
       if (value === 'firstName' || value === 'lastName') {
@@ -19,6 +22,7 @@ class Store {
         return -1;
       }
     });
+
 
   splitDataToPages = newData => {
     let copy = [...newData];
@@ -52,6 +56,7 @@ class Store {
   getSplittedDataForCurrentPage = currentPage =>
     this.splittedData[currentPage - 1];
 
+  // return data without sorting
   getOriginalSortedData = currentPage => {
     this.splittedData = this.splitDataToPages(this.dataCopy);
     return this.getSplittedDataForCurrentPage(currentPage);

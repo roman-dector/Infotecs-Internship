@@ -22,5 +22,4 @@ const helper = {
     li.appendChild(node);
     return li;
   },
-
 };
